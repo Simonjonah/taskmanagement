@@ -10,12 +10,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Add Task</h1>
+            <h1>Add Project</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Add Task</li>
+              <li class="breadcrumb-item active">Add Project</li>
             </ol>
           </div>
         </div>
@@ -31,11 +31,11 @@
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Add Task</h3>
+                <h3 class="card-title">Add Project</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form action="{{ url('web/store') }}" method="post" enctype="multipart/form-data">
+              <form action="{{ url('web/createproject/'.$view_task->id) }}" method="post" enctype="multipart/form-data">
                   @csrf
                   {{-- @method('PUT') --}}
                   @if (Session::get('success'))
@@ -58,17 +58,31 @@
                       <div class="form-group">
                         <label for="">Task Name</label>
                         <input name="task_name" type="text" @error('task_name') is-invalid @enderror"
-                        value="{{ old('task_name') }}" class="form-control" id="" placeholder="Task Name">
+                        value="{{ $view_task->task_name }}" disabled class="form-control" id="" placeholder="Project Name">
                     </div>
                     @error('task_name')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
 
+                    <div class="form-group">
+                        <label for="">Project Name</label>
+                        <input name="project_name" type="text" @error('project_name') is-invalid @enderror"
+                        value="{{ old('project_name') }}" class="form-control" id="" placeholder="Project Name">
+                    </div>
+                    @error('project_name')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
 
-                   
 
-                    
-                </div>
+
+                    <div class="form-group">
+                     <textarea class="textarea" name="description" class="form-control" @error('description') is-invalid @enderror" placeholder="Write description here"
+                      value="" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                     </div>
+                      @error('description')
+                      <span class="text-danger">{{ $message }}</span>
+                      @enderror
+                    </div>
                 </div>
                   
                   <div class="card-footer">

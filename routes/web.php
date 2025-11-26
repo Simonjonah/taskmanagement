@@ -1,10 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AdminController;
+use App\Http\Controllers\TaskController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\SubcategoryController;
+use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\TestimonyController;
@@ -30,41 +30,28 @@ Route::get('/', function () {
 });
 
 
-Route::get('/remove/{id}', [CartController::class, 'remove'])->name('remove');
 Auth::routes();
-
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::post('/createuser', [UserController::class, 'createuser'])->name('createuser');
 
 
 Route::prefix('web')->name('web.')->group(function() {
 
     Route::middleware(['guest:web'])->group(function() {
-        
         Route::post('/check', [UserController::class, 'check'])->name('check');
+        Route::get('/register', [UserController::class, 'register'])->name('register');
+        Route::post('/create', [UserController::class, 'create'])->name('create');
     });
     
     Route::middleware(['auth:web'])->group(function() {
-        
-        // Route::view('/home','dashboard.home')->name('home');
         Route::get('/home', [UserController::class, 'home'])->name('home');
-        
-        Route::get('/profile', [UserController::class, 'profile'])->name('profile');
-        Route::get('/viewmyproducts/{ref_no}', [TransactionController::class, 'viewmyproducts'])->name('viewmyproducts');
-        Route::get('/myorders', [TransactionController::class, 'myorders'])->name('myorders');
-        Route::get('/mytransactions', [TransactionController::class, 'mytransactions'])->name('mytransactions');
-        
-        
-        Route::post('/addtofavourite', [FavouriteController::class, 'addtofavourite'])->name('addtofavourite'); 
-        Route::get('/favourite', [FavouriteController::class, 'favourite'])->name('favourite'); 
-        Route::get('/favouritedetails/{ref_no}', [ProductController::class, 'favouritedetails'])->name('favouritedetails'); 
-        Route::get('/myfavourite', [ProductController::class, 'myfavourite'])->name('myfavourite'); 
-        Route::get('/settings', [UserController::class, 'settings'])->name('settings'); 
-        Route::get('/profile', [UserController::class, 'profile'])->name('profile'); 
-        Route::get('/updateprofile', [UserController::class, 'updateprofile'])->name('updateprofile'); 
-        Route::put('/updatemyprofile/{ref_no}', [UserController::class, 'updatemyprofile'])->name('updatemyprofile'); 
-        Route::put('/passwordprofile/{ref_no}', [UserController::class, 'passwordprofile'])->name('passwordprofile'); 
+        Route::post('/store', [TaskController::class, 'store'])->name('store');
+        Route::post('/update/{id}', [TaskController::class, 'update'])->name('update');
+        Route::get('/destroy/{id}', [TaskController::class, 'destroy'])->name('destroy');
+        Route::post('/reorder', [TaskController::class, 'reorder'])->name('reorder');
+        Route::get('/viewtask', [TaskController::class, 'viewtask'])->name('viewtask');
+        Route::get('/addproject/{id}', [TaskController::class, 'addproject'])->name('addproject');
+        Route::post('/createproject/{id}', [TaskController::class, 'createproject'])->name('createproject');
+        Route::get('/viewproject', [ProjectController::class, 'viewproject'])->name('viewproject');
         
         Route::get('/logout', [UserController::class, 'logout'])->name('logout'); 
         

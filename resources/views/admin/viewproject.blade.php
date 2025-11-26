@@ -1,6 +1,6 @@
-@include('dashboard.admin.header')
+@include('admin.header')
 
-@include('dashboard.admin.sidebar')
+@include('admin.sidebar')
 
 
   <!-- Content Wrapper. Contains page content -->
@@ -10,7 +10,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>DataTables</h1>
+            <h1>Project Table</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -37,9 +37,11 @@
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
-                    <th>Category</th>
+                    <th>Task Name</th>
+                    <th>Project Name</th>
+                    <th>Body</th>
+
                     <th>Edit</th>
-                    <th>Add Subcategory</th>
                     <th>Delete</th>
                     <th>Date</th>
                   </tr>
@@ -55,31 +57,32 @@
                   <div class="alert alert-danger">
                   {{ Session::get('fail') }}
                   @endif
-                  @foreach ($view_categories as $view_categorie)
+                  @foreach ($view_projects as $view_project)
                     <tr>
-                        <td>{{ $view_categorie->categoryname }}</td>
-                        <td><a href="{{ url('admin/editcategory/'.$view_categorie->ref_no) }}"
+                        <td>{{ $view_project->project_name }}</td>
+                        <td>{{ $view_project->task['task_name'] }}</td>
+                        <td>{{ $view_project->description }}</td>
+                        <td><a href="{{ url('web/editproject/'.$view_project->id) }}"
                           class='btn btn-info'>
                            <i class="far fa-edit"></i>
                        </a></td>
-                       <td><a href="{{ url('admin/addsubcategory/'.$view_categorie->ref_no) }}"
-                        class='btn btn-success'>
-                         <i class="far fa-copy"></i>
-                     </a></td>
+                      
                          
-                       <td><a href="{{ url('admin/deletecategory/'.$view_categorie->ref_no) }}"
+                       <td><a href="{{ url('web/deleteproject/'.$view_project->id) }}"
                         class='btn btn-danger'>
                          <i class="far fa-trash-alt"></i>
                      </a></td>
-                     <td>{{ $view_categorie->created_at->format('D d, M Y, H:i')}}</td>
+                     <td>{{ $view_project->created_at->format('D d, M Y, H:i')}}</td>
                     </tr>
                     @endforeach
                   </tbody>
                   <tfoot>
                   <tr>
-                    <th>Category</th>
+                    <th>Task Name</th>
+                    <th>Project Name</th>
+                    <th>Body</th>
+
                     <th>Edit</th>
-                    <th>Add Subcategory</th>
                     <th>Delete</th>
                     <th>Date</th>
                   </tr>
@@ -102,7 +105,7 @@
 </div>
 <!-- ./wrapper -->
 
-@include('dashboard.admin.footer')
+@include('admin.footer')
 <!-- <script>
   $(function () {
     $("#example1").DataTable({
