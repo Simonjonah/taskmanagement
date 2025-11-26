@@ -52,7 +52,10 @@ Route::prefix('web')->name('web.')->group(function() {
         Route::get('/addproject/{id}', [TaskController::class, 'addproject'])->name('addproject');
         Route::post('/createproject/{id}', [TaskController::class, 'createproject'])->name('createproject');
         Route::get('/viewproject', [ProjectController::class, 'viewproject'])->name('viewproject');
-        
+        Route::get('/editproject/{id}', [ProjectController::class, 'editproject'])->name('editproject');
+        Route::put('/updateproject/{id}', [ProjectController::class, 'updateproject'])->name('updateproject');
+        Route::get('/viewtaskproject/{id}', [TaskController::class, 'viewtaskproject'])->name('viewtaskproject');
+        Route::get('/deleteproject/{id}', [ProjectController::class, 'deleteproject'])->name('deleteproject');
         Route::get('/logout', [UserController::class, 'logout'])->name('logout'); 
         
        

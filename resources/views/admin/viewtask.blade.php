@@ -41,43 +41,59 @@
             </div>
         @endif
         <section class="content">
-        <div class="container-fluid">
-            <div class="row">
-            <div class="col-12">
-                <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Drag and Drop to Reorder Tasks</h3>
-                </div>
-                <div class="card-body">
-                    <div id="sortable">
-                        @foreach($view_tasks as $view_task)
-                            <div class="task-item" data-id="{{ $view_task->id }}">
-                                <form action="{{ route('web.update', $view_task->id) }}" method="POST" style="display:inline-block;">
-                                    @csrf
-                                    <input type="text" name="task_name" value="{{ $view_task->task_name }}">
-                                    <button class="btn btn-info" type="submit"><i class="far fa-edit"></i>Update</button>
-                                </form>
+            <div class="container-fluid">
+                <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Drag and Drop to Reorder Tasks</h3>
+                    </div>
+                    <div class="card-body">
+                        <div id="sortable">
 
-                                
-                                
-                                <a href="{{ url('web/destroy/'.$view_task->id) }}" class="btn btn-danger"> <i class="far fa-trash-alt"></i>Delete</button>
-                                </a>
-                                <a href="{{ route('web.addproject', $view_task->id) }}" class="btn btn-success">Add Product</a>
+                            @foreach($view_tasks as $view_task)
+                                <div class="task-item" data-id="{{ $view_task->id }}">
 
+                                    <form action="{{ route('web.update', $view_task->id) }}" method="POST" style="display:inline-block;">
+                                        @csrf
+                                        <input type="text" name="task_name" value="{{ $view_task->task_name }}">
 
-                                
-                            </div>
-                        @endforeach
-                    </div>          
-                </div>
+                                        
+                                        <select  class="form-control" style="width:150px; display:inline-block;" onchange="if(this.value) window.location.href=this.value;">
+                                            <option value="">View Project</option>
+                                            <option value="{{ url('web/viewtaskproject/'.$view_task->id) }}">{{ $view_task->task_name }}</option>
+                                            
+                                        </select>
+
+                                        
+
+                                        <button class="btn btn-info" type="submit">
+                                            <i class="far fa-edit"></i> Update
+                                        </button>
+                                    </form>
+
+                                    <a href="{{ url('web/destroy/'.$view_task->id) }}" class="btn btn-danger">
+                                        <i class="far fa-trash-alt"></i> Delete
+                                    </a>
+
+                                    <a href="{{ route('web.addproject', $view_task->id) }}" class="btn btn-success">
+                                        Add Product
+                                    </a>
+
+                                </div>
+                            @endforeach
+
+                        </div>          
+                    </div>
+                    </div>
                 </div>
             </div>
-            </div>
-        </div>
         </section>
+
     </div>
 
 <script>
+    
 $(function(){
 
     $('#sortable').sortable({
@@ -97,7 +113,13 @@ $(function(){
     });
 
 });
+
+
 </script>
+
+
+
+
 
 </body>
 </html>

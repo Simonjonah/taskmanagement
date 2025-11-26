@@ -127,4 +127,16 @@ class TaskController extends Controller
         }
         return redirect()->back()->with('success', 'Project created successfully');
     }
+
+
+    public function viewtaskproject($id){
+        $view_task = Task::find($id);
+        if (!$view_task) {
+            return redirect()->back()->with('fail', 'Task not found');
+        }
+        $view_projects = Project::where('task_id', $view_task->id)->latest()->get();
+        return view('admin.viewtaskproject', compact('view_task', 'view_projects'));
+    }
+
+
 }

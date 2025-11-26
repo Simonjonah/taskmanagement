@@ -1,6 +1,6 @@
-@include('dashboard.admin.header')
+@include('admin.header')
 
-@include('dashboard.admin.sidebar')
+@include('admin.sidebar')
 
 
   <!-- Content Wrapper. Contains page content -->
@@ -10,7 +10,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>DataTables</h1>
+            <h1>Project Table</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -28,7 +28,6 @@
         <div class="row">
           <div class="col-12">
             
-
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">DataTable with default features</h3>
@@ -38,12 +37,10 @@
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
-                    
-                    <th>Ref No</th>
-                    <th>Category</th>
-                    <th>Sub Category</th>
-                    <th>Description</th>
-                    <th>Add Products</th>
+                    <th>Task Name</th>
+                    <th>Project Name</th>
+                    <th>Body</th>
+
                     <th>Edit</th>
                     <th>Delete</th>
                     <th>Date</th>
@@ -60,37 +57,31 @@
                   <div class="alert alert-danger">
                   {{ Session::get('fail') }}
                   @endif
-                  @foreach ($view_subcategories as $view_subcategorie)
+                  @foreach ($view_projects as $view_project)
                     <tr>
-                        <td>{{ $view_subcategorie->ref_no }}</td>
-                        <td>{{ $view_subcategorie->category['categoryname'] }}</td>
-                        <td>{{ $view_subcategorie->subcategoryname }}</td>
-                        <td>{!! $view_subcategorie->body !!}</td>
-                        <td><a href="{{ url('admin/addproducts/'.$view_subcategorie->ref_no) }}"
+                        <td>{{ $view_project->project_name }}</td>
+                        <td>{{ $view_project->task['task_name'] }}</td>
+                        <td>{{ $view_project->description }}</td>
+                        <td><a href="{{ url('web/editproject/'.$view_project->id) }}"
                           class='btn btn-info'>
-                           <i class="far fa-info"></i>
-                       Add Products</a></td>
-                       <td><a href="{{ url('admin/editsubcategory/'.$view_subcategorie->ref_no) }}"
-                        class='btn btn-success'>
-                         <i class="far fa-edit"></i>
-                     </a></td>
-                       
+                           <i class="far fa-edit"></i>
+                       </a></td>
+                      
                          
-                       <td><a href="{{ url('admin/deletesubcategory/'.$view_subcategorie->ref_no) }}"
+                       <td><a href="{{ url('web/deleteproject/'.$view_project->id) }}"
                         class='btn btn-danger'>
                          <i class="far fa-trash-alt"></i>
                      </a></td>
-                     <td>{{ $view_subcategorie->created_at->format('D d, M Y, H:i')}}</td>
+                     <td>{{ $view_project->created_at->format('D d, M Y, H:i')}}</td>
                     </tr>
                     @endforeach
                   </tbody>
                   <tfoot>
                   <tr>
-                    <th>Ref No</th>
-                    <th>Category</th>
-                    <th>Sub Category</th>
-                    <th>Description</th>
-                    <th>Add Products</th>
+                    <th>Task Name</th>
+                    <th>Project Name</th>
+                    <th>Body</th>
+
                     <th>Edit</th>
                     <th>Delete</th>
                     <th>Date</th>
@@ -114,7 +105,7 @@
 </div>
 <!-- ./wrapper -->
 
-@include('dashboard.admin.footer')
+@include('admin.footer')
 <!-- <script>
   $(function () {
     $("#example1").DataTable({
