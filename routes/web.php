@@ -5,22 +5,7 @@ use App\Http\Controllers\TaskController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProjectController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\SectionController;
-use App\Http\Controllers\TestimonyController;
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\FavouriteController;
-use App\Http\Controllers\ContactController;
-use App\Http\Controllers\TeamController;
 
-
-use App\Http\Controllers\TransactionController;
-
-
-
-use App\Models\Product;
-use App\Models\Testimony;
-use App\Models\Team;
 
 
 

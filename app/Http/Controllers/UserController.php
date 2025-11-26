@@ -38,7 +38,7 @@ class UserController extends Controller
         ]);
         $creds = $request->only('email', 'password');
         if (Auth::guard('web')->attempt($creds)) {
-            return redirect()->route('web.home')->with('success', 'You have successfully login');
+            return redirect()->route('home')->with('success', 'You have successfully login');
         }else{
             return redirect()->route('web.login')->with('error', 'Failed to login');
         }
@@ -47,5 +47,10 @@ class UserController extends Controller
 
     public function home (){
         return view('home');
+    }
+
+    public function logout(){
+        Auth::guard('web')->logout();
+        return redirect()->route('login');
     }
 }
