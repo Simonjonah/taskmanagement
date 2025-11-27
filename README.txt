@@ -9,6 +9,10 @@ Instruction on how to install the "Task Management System"
 7. open you terminal run php artisan serve
 8 the site will open, you can register as well or use this login details to enter admin:
 9. Email simonudo74@gmail.com password: 000000000 
-10. start to enjoy the website
+
+10. Import database "taskmanagement.sql" in this folder
+11. start to enjoy the website
+12. Should have any difficulty please do not hesitate to reach out to me using the above email
+
 
 11 Hope to hear positive response from you, thank you.
